@@ -11,7 +11,7 @@ COPY rootfs /
 
 USER bitnami
 
-RUN cd ~ && ng new sample --style=sass && \
+RUN cd ~ && ng new sample --style=scss && \
   # Latest TypeScript version is broken, see https://github.com/angular/angular-cli/issues/1922#issuecomment-243952252
   cd sample && npm uninstall typescript --save-dev && npm install typescript@2.0.0 --save-dev --save-exact && \
   # Latest awesome-typescript-loader is broken, see https://github.com/angular/angular-cli/issues/1997

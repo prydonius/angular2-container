@@ -12,6 +12,10 @@ app_present() {
   [ -f /app/package.json ]
 }
 
+modules_present() {
+  [ -d /app/node_modules ]
+}
+
 dependencies_up_to_date() {
   # It is up to date if the package file is older than
   # the last time the container was initialized
@@ -27,7 +31,13 @@ if [ "$1" == ng -a "$2" == "serve" ]; then
     log "Creating angular application"
     sudo chown -R bitnami:bitnami /app
     # Copy the bootstrapped app at buildtime
-    cp -r ~/sample/* /app
+    tar xzf ~/sample.tar.gz --strip-components=1
+  fi
+
+  # Copy the backed modules existing in the sample app
+  if ! modules_present; then
+    log "Copying node_modules directory"
+    tar xzf ~/sample.tar.gz --strip-components=1 sample/node_modules
   fi
 
   if ! dependencies_up_to_date; then

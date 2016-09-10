@@ -16,7 +16,8 @@ RUN cd ~ && ng new sample --style=scss && \
   cd sample && npm uninstall typescript --save-dev && npm install typescript@2.0.0 --save-dev --save-exact && \
   # Latest awesome-typescript-loader is broken, see https://github.com/angular/angular-cli/issues/1997
   npm uninstall awesome-typescript-loader --save-dev && npm install awesome-typescript-loader@2.2.1 --save-dev --save-exact && \
-  sudo rm -rf /tmp/npm*
+  cd ../ && tar czf sample.tar.gz sample && \
+  sudo rm -rf /tmp/npm* sample
 
 WORKDIR /app
 EXPOSE 4200 49152
